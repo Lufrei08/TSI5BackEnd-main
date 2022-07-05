@@ -2,7 +2,9 @@ const {checkSchema} = require('express-validator');
 // validador de dados ou validadção
 module.exports = {
     singup: checkSchema({
-        
+        token:{
+            notEmpty:true
+        },
         name:{
             notEmpty:true,
             trim: true, //Corta espaços extra
@@ -39,8 +41,5 @@ module.exports = {
             },
             errorMessage: 'Senha precisa ter no minimo 6 caracteres'
         },
-    }),
-    editVendedor: async (req,res) => {
-
-    }
+    })
 }

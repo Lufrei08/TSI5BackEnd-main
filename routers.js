@@ -11,6 +11,8 @@ const Auth = require('./middleware/middleware');
 const productvalidator = require("./validator/productvalidator");
 const AdController = require('./controller/adcontroller');
 const { addProduct } = require('./controller/productcontroller');
+const vendValidator = require('./validator/vendvalidator');
+const vendvalidator = require('./validator/vendvalidator');
 
 //rota para obter estados --> publica
 router.get('/states', usercontroller.getStates);
@@ -25,7 +27,7 @@ router.put('/ad/id', AdController.editAction);
 router.get('/categories', AdController.getCategories);
 //buscas info vendedor
 router.get('/user/vendedor', AuthControllerVend.getInfo);
-router.put('/user/vendedor', AuthControllerVend.editAction)
+router.put('/user/vendedor',vendValidator.editAction, AuthControllerVend.editVendedor);
 // processo criar usuario
 //to do --> implementar midleware para rotas privadas...
 router.put('/user/me', usercontroller.editAction);

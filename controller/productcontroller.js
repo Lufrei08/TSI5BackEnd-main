@@ -41,7 +41,7 @@ module.exports = {
 
         //const data = req.body;
         const data = matchedData(req);
-        console.log(data);
+       // console.log(data);
         let updates = {};
         if (data.name) {
             updates.name = data.name;
