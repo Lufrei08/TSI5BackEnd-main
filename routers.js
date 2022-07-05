@@ -27,11 +27,11 @@ router.put('/ad/id', AdController.editAction);
 router.get('/categories', AdController.getCategories);
 //buscas info vendedor
 router.get('/user/vendedor', AuthControllerVend.getInfo);
-router.put('/user/vendedor',vendValidator.editAction, AuthControllerVend.editVendedor);
+router.put('/user/vendedor', AuthControllerVend.editVendedor);
 // processo criar usuario
 //to do --> implementar midleware para rotas privadas...
 router.put('/user/me', usercontroller.editAction);
-router.put('/products', productvalidator.editAction, productcontroller.editProduct);
+router.put('/products', productcontroller.editProduct);
 //router.get('/user/me', usercontroller.info);
 //router.post('/user/me', usercontroller.insertAction);
 
@@ -41,7 +41,8 @@ router.post('/user/signup', validator.editAction, AuthController.signup);
 router.post('/products', productcontroller.addProduct);
 router.post('/user/singin', AuthController.signin);
 //router.post('/vendedor/singup', AuthController.signup);
-router.post('/vendedor/',AuthControllerVend.addVendedor);
+router.post('/vendedor',AuthControllerVend.addVendedor);
 
-
+router.delete('/vendedor', AuthControllerVend.deleteVendedor);
+router.delete('/products', productcontroller.deleteProduct);
 module.exports = router;

@@ -29,19 +29,9 @@ module.exports = {
 
     },
     editProduct: async (req, res) => {
-        //para fazer validação 
-        const erros = validationResult(req);
-
-        if (!erros.isEmpty()) {
-            res.json({
-                error: erros.mapped()
-            });
-            return;
-        }
-
-        //const data = req.body;
-        const data = matchedData(req);
-       // console.log(data);
+        const data = req.body;
+        //const data = matchedData(req);
+        console.log(data);
         let updates = {};
         if (data.name) {
             updates.name = data.name;
@@ -61,8 +51,13 @@ module.exports = {
         //console.log(_id)
         await Product.findByIdAndUpdate({ _id: data.id }, { $set: updates });
         res.json({});
+    },
+
+    deleteProduct: async (req, res) => {
+        let id = req.body;
+        console.log(req.body);
+        let data = await Product.deleteOne(id);
+        res.send(data)
     }
-
-
 }
 

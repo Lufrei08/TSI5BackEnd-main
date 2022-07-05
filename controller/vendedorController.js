@@ -72,114 +72,17 @@ module.exports = {
         res.json({ info });
 
     },
-    /*editAction: async (req, res) => {
-        //TODO --> Validação
-        const erros = validationResult(req);
-
-        if (!erros.isEmpty()) {
-            req.json({
-                error: erros.mapped()
-            });
-            return;
-        }
-        const data = matchedData(req);
-
-        let updates = {};
-
-        if (data.name) {
-            updates.name = data.name;
-        }
-
-        if (data.email) {
-            const emailCheck = await User.findOne({ email: data.email });
-            if (emailCheck) {
-                res.json({ error: 'Email já existente' });
-                return;
-            }
-
-            updates.email = data.email;
-        }
-
-        if (data.state) {
-            if (mongoose.Types.ObjectId.isValid(data.state)) {
-                const stateCheck = await State.findById(data.state);
-                if (!stateCheck) {
-                    res.json({ error: 'Estado não existe' });
-                    return;
-                }
-                updates.states = data.state;
-            } else {
-                res.json({ error: 'codigo do estado em formato invalido' });
-                return;
-            }
-        }
-        if (data.password) {
-            updates.passwordHash = await bcrypt.hash(data.password, 10);
-        }
-        await User.findByIdAndUpdate({ token: data.token }, { $set: updates });
-        res.json({});
-    }*/
-
-   /* editVendedor: async (req, res) => {
-        let { id, name, email, passwordHash, state, token } = req.body;
-
-        
-
-        //console.log(name)
-        const newVendedor = new vendedor();
-        newVendedor.id = id
-        if (name) {
-            newVendedor.name = name;
-        }
-        if (email) {
-            const emailCheck = await User.findOne({ email: email });
-            if (emailCheck) {
-                res.json({ error: 'Email já existente!' });
-                return;
-            }
-            newVendedor.email = email;
-        }
-
-        if (passwordHash) {
-            passwordHash = await bcrypt.hash(passwordHash, 10);
-            newVendedor.passwordHash = passwordHash;
-        }
-
-        if (state) {
-            if (mongoose.Types.ObjectId.isValid(state)) {
-                const statesCheck = await State.findById(state);
-                if (!statesCheck) {
-                    res.json({ error: 'Estado não existe' });
-                    return;
-                }
-                newVendedor.state = state;
-
-            } else {
-                res.json({ error: 'Código do estado em formato inválido' });
-                return;
-            }
-        }
-
-        if (token) {
-            const padraoToken = (Date.now + Math.random()).toString();
-            token = await bcrypt.hash(padraoToken, 10);
-            newVendedor.token = token;
-        }
-
-        await vendedor.findByIdAndUpdate({id});
-        res.json({});
-
-    }*/
-    editVendedor: async(req, res) => {
-        const erros = validationResult(req);
+    editVendedor: async (req, res) => {
+        /*const erros = validationResult(req);
         if (!erros.isEmpty()) {
             res.json({
                 error: erros.mapped()
             });
             return;
-        }
+        }*/
 
-        const data = matchedData(req);
+        // const data = matchedData(req);
+        const data = req.body;
 
         let updates = {};
         console.log(data.name);
@@ -214,7 +117,7 @@ module.exports = {
             }
         }
 
-        if (!data.passwordHash) {
+        if (data.passwordHash) {
             updates.passwordHash = await bcrypt.hash(data.password, 10);
 
         }
@@ -223,5 +126,12 @@ module.exports = {
 
         res.json({});
 
+    },
+    deleteVendedor: async (req, res) => {
+        let id = req.body;
+        console.log(req.body);
+        let data = await User.deleteOne(id);
+        res.send(data)
     }
+
 };
