@@ -1,0 +1,35 @@
+oque fazer ainda
+1) acrescentar cnpj, no model 
+2) criar um middleWay, para trabalahr com postagens
+3) fazer o put no router
+4) descomentar vendedor controller
+--------------------------------------------------------------------------------------------------------
+Post --> Get
+
+Sistema Market Place
+
+-->State
+    ID: tornar dinamico UUID
+    name: GO, MG
+
+Etapas para construcao
+1 --> Elaborar um model
+2 --> Elaborar um controller
+3 --> Rotas de acesso para as funcoes (POST, GET)
+
+--> user
+    ID: dinamico
+    name: String
+    email: String
+    passwordHash: String
+    state: String
+    token: String
+
+--> product 
+    ID: dinamico
+    name: String
+    description: String
+    inventory: int
+    lenght: float
+    height: float
+------------------------------------------------------------------
