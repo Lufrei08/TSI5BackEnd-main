@@ -21,17 +21,30 @@ module.exports = {
     },
 
     addVendedor: async(req, res) => {
-        let {name, email, passwordHash, state} = req.body;
-
-        if (!name || !email || !passwordHash){
-            res.json({ error: 'Algo não foi preenchido!'});
+        let {name, email, password, state} = req.body;
+        const erros = validationResult(req.body);
+        console.log(email)
+        if(!erros.isEmpty()){
+            res.json({
+                error: erros.mapped()
+            });
             return;
         }
+        //const data = matchedData(req.body);
         //console.log(name)
         const newVendedor = new vendedor();
         newVendedor.name = name;
-        newVendedor.email = email;
-        newVendedor.passwordHash = passwordHash;
+        console.log(name);
+        if(email){
+            const emailCheck = await User.findOne({ email: email});
+            if(emailCheck){
+                res.json ({error: 'Email já existente!'});
+                return;
+            }
+            newVendedor.email = email;   
+        }
+        
+        newVendedor.password = password;
         newVendedor.state = state;
 
         const info = await newVendedor.save();

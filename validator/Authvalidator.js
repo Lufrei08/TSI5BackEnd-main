@@ -2,10 +2,7 @@ const {checkSchema} = require('express-validator');
 // validador de dados ou validadção
 module.exports = {
     singup: checkSchema({
-        token:{
-            notEmpty:true
-            //Definindo as validações do Usuario
-        },
+        
         name:{
             notEmpty:true,
             trim: true, //Corta espaços extra
